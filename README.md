@@ -38,11 +38,11 @@ theoretical pros of AS:
 say this because the number of differential equations that are needed to be solved scales
 linearly, and it is likely that K (# of gridpoints per diff. eq.) is constant/grows
 polynomially. i do not have a formal proof for this, however testing AS in comparison with algorithms
-such as A* is likely to reveal this nature. K is most likely dependent on solely the greatest
-line distance between the start and target points (think x_2 - x_1 or y_2 - y_1) and there is no reason
-for K to depend on the dimensions of the environment as the function x_i(t) is still 1D no matter
-the dimensions of the environment
-- suitable for higher dimensions (4D+)
+such as A* is likely to reveal this nature (i have NOT done this yet). K is most likely dependent on
+solely the greatest line distance between the start and target points (think x_2 - x_1 or y_2 - y_1)
+and there is no reason for K to depend on the dimensions of the environment as the function x_i(t) is
+still 1D no matter the dimensions of the environment
+- its very suitable for cost minimization/pathfinding in higher dimensions (4D+)
 
 theoretical cons of AS:
 - really hard and time consuming to control/configure starting positions bcuz of the concepts AS
