@@ -48,9 +48,7 @@ still 1D no matter the dimensions of the environment
 - its very suitable for cost minimization/pathfinding in higher dimensions (4D+)
 
 theoretical cons of AS:
-- really hard and time consuming to control/configure starting positions bcuz of the concepts AS
-uses, object equation is quite complex and hard to generalize for all solids, annoying to figure
-out object variables, automation is virtually necessary
+- setting up objects manually might be bottom 5 activities of all time
 - useless for 2D
 - near-impossible to reasonably visualize higher dimensional scalar fields/solids (3D+)
 - requires an automatic differentiation library or an implementation of it to be effective
