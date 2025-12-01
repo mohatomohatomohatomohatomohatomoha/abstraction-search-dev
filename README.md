@@ -81,6 +81,6 @@ concepts to use:
 - n-dimensional contour plots
 - line integrals
 - parameterization
-finite difference method
-newton-raphson method
-jacobian matrix (possible help for path recorrection? dont know exactly what this is but this seems useful for boundary value problems like the one given by FDM https://pages.hmc.edu/ruye/MachineLearning/lectures/ch2/node7.html)
+- finite difference method
+- newton-raphson method
+- jacobian matrix (possible help for path recorrection? dont know exactly what this is but this seems useful for boundary value problems like the one given by FDM https://pages.hmc.edu/ruye/MachineLearning/lectures/ch2/node7.html)
