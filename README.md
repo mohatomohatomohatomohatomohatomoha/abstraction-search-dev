@@ -32,7 +32,7 @@ as the initial path is recorrected into a local minima/maxima/saddle point. for 
 that the global minima is reached, repeated iterations of newton-raphson is needed. keep track
 of the path with the least cost.
 
-step 5. the x and y values of the discretized path is given, therefore the near-optimal/optimal path
+step 5. the x and y values of the discretized path are given, therefore the near-optimal/optimal path
 is found.
 
 theoretical pros of AS:
