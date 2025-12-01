@@ -73,16 +73,16 @@ likely wont finish for a LONG time. regardless if my assumptions are correct or 
 AS is even a valid algorithm to use, i'll have fun crying while working on this
 
 tools to use:
-sympy for symbolic differentiation and chain rule (bestowed as a gift from higher dimensional beings...get it 😹😹😹)
-matplotlib (?) or something else to simulate scalar fields
+- sympy for symbolic differentiation and chain rule (bestowed as a gift from higher dimensional beings...get it 😹😹😹)
+- matplotlib (?) or something else to simulate scalar fields
 
 concepts to use:
-lagrangian
-euler-lagrange equation
-functional minimization/maximization
-n-dimensional contour plots
-line integrals
-parameterization
+- lagrangian
+- euler-lagrange equation
+- functional minimization/maximization
+- n-dimensional contour plots
+- line integrals
+- parameterization
 finite difference method
 newton-raphson method
 jacobian matrix (possible help for path recorrection? dont know exactly what this is but this seems useful for boundary value problems like the one given by FDM https://pages.hmc.edu/ruye/MachineLearning/lectures/ch2/node7.html)
