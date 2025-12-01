@@ -71,7 +71,7 @@ likely wont finish for a LONG time. regardless if my assumptions are correct or 
 AS is even a valid algorithm to use, i'll have fun crying while working on this
 
 tools to use:
-- sympy for symbolic differentiation and chain rule (bestowed as a gift from higher dimensional beings...get it 😹😹😹)
+- sympy for symbolic differentiation (bestowed as a gift from higher dimensional beings...get it 😹😹😹)
 - matplotlib (?) or something else to simulate scalar fields
 
 concepts to use:
