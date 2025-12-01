@@ -6,24 +6,27 @@ polynomial, and compared to superpolynomial and implicitly
 superpolynomial alternatives such as A* and RRT, abstraction search
 shines in higher dimensions where A* and RRT cant.
 
-step 1. abstract segments of the n-dimensional environment into
-their own scalar fields, the most general being an "object" (n-dimensional prism/sphere hybrid, 
-something like an n-dimensional superellipse) and let the full environment be a sum of objects. let
-the sum be S(x_1,..., x_n)
+step 1 (abstraction).
+abstract segments of the n-dimensional environment into their own scalar fields, the most general
+being an "object" (n-dimensional prism/sphere hybrid, something like an n-dimensional superellipse)
+and let the full environment be a sum of objects. let the sum be S(x_1,..., x_n)
 
-step 2. find the lagrangian of the line integral of S, which is simply
+step 2 (iterative setup).
+find the lagrangian of the line integral of S, which is simply
 L(x_1(t),...x_n(t)) = S(x_1(t),...x_n(t)) * sqrt((dx_1/dt)^2+...+(dx_n/dt)^2)
 as the lagrangian of the action integral is the integrand
 
-step 3. using euler-lagrange, create n differential equations.
+then, using euler-lagrange, create n differential equations.
 example: \frac{d}{dt}\cdot\frac{dL}{d\dot{x}_i}= = \frac{dL}{dx_i}
 
-then, using an automatic differentiation library, store each differential equation into the library
+step 3 (FDM, systems of equations created).
+then, using symbolic differentiation (sympy?), chain rule each euler-lagrange
 and substitute orders of derivatives of x_i with their alternatives using FDM (letting K be the
 number of discrete grid points along the path. by giving boundaries by giving the start/end points
 we get a boundary value problem, BVP for short)
 
-step 4. there will be multiple functions x_i(t) that satisfy the euler-lagrange equation, as there
+step 4 (newton-raphson, self-correction, iterated NRM). 
+there will be multiple functions x_i(t) that satisfy the euler-lagrange equation, as there
 will always be a minimum and maximum. newton-raphson method must be utilized to make an initial guess
 as the initial path is recorrected into a local minima/maxima/saddle point. for a higher confidence
 that the global minima is reached, repeated iterations of newton-raphson is needed. keep track
@@ -68,3 +71,18 @@ a standard in path planning in higher dimensions.
 everything that i say here is theoretical, as i haven't started working on the code yet and
 likely wont finish for a LONG time. regardless if my assumptions are correct or not or if
 AS is even a valid algorithm to use, i'll have fun crying while working on this
+
+tools to use:
+sympy for symbolic differentiation and chain rule (bestowed as a gift from higher dimensional beings...get it 😹😹😹)
+matplotlib (?) or something else to simulate scalar fields
+
+concepts to use:
+lagrangian
+euler-lagrange equation
+functional minimization/maximization
+n-dimensional contour plots
+line integrals
+parameterization
+finite difference method
+newton-raphson method
+jacobian matrix (possible help for path recorrection? dont know exactly what this is but this seems useful for boundary value problems like the one given by FDM https://pages.hmc.edu/ruye/MachineLearning/lectures/ch2/node7.html)
