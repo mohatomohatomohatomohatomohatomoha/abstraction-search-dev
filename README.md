@@ -29,7 +29,7 @@ step 4 (newton-raphson, self-correction, iterated NRM).
 there will be multiple functions x_i(t) that satisfy the euler-lagrange equation, as there
 will always be a minimum and maximum. newton-raphson method must be utilized to make an initial guess
 as the initial path is recorrected into a local minima/maxima/saddle point. for a higher confidence
-that the global minima is reached, repeated iterations of newton-raphson is needed. keep track
+that the global minima is reached, newton-raphson must be ran multiple times with different paths as initial guesses. keep track
 of the path with the least cost.
 
 step 5. the x and y values of the discretized path are given, therefore the near-optimal/optimal path
