@@ -8,7 +8,7 @@ The second instruction is to calculate the Lagrangian of the line integral of $\
 $L(x_1(t),\dots)=\mathcal{S}(x_1(t),\dots)\sqrt{\dot{x}_1^2+\dots+\dot{x}_n^2}$
 where $x_i(0)=p_i$ and $x_i(1)=q_i$.
 
-The third instriuction is to create a Euler-Lagrange equation for each dimension to solve for the minimal path $x_i(t)$ for $i\in\{\mathbb{Z}\cap[1,n]\}$. This creates $n$ differential equations. The equation for a given $i$ is
+The third instruction is to create a Euler-Lagrange equation for each dimension to solve for the minimal path $x_i(t)$ for $i\in\{\mathbb{Z}\cap[1,n]\}$. This creates $n$ differential equations. The equation for a given $i$ is
 $\frac{d}{dt}(\frac{dL}{d\dot{x}_i})=\frac{dL}{dx_i}.$
 Symbolic differentiation libraries are utilized to find the symbolic expression of each side of the equation.
 
@@ -22,7 +22,10 @@ At this point in the algorithm, a near-optimal/optimal path is found with some c
 $\mathcal{C}(\mathcal{S}(x_1,\dots,x_n)) \approx \frac{\mathcal{A}(\delta,\beta)}{2^{(\beta-\xi)} -(\beta-\xi)-1}$
 where $\beta$ is the number of objects, $\xi$ is the number of overlapping objects, and $\mathcal{A(\delta, \beta)}$ is the average number of objects discovered from Newton-Raphson method out of $\beta$ total objects after $\delta$ iterations. This confidence score is not guaranteed to work for all possible values of $\mathcal{S}$, however it is a decent heuristic for estimating the chances that the optimal path is found. The estimated bounds of $\mathcal{C}$ is $\mathcal{C}\in[0,1)$ for $\beta\in\mathbb{Z^+}$ and $\delta\ge0,\delta\in\mathbb{Z}$.
 
-concepts utilized:
+
+
+
+concepts to use in code:
 - lagrangian
 - euler-lagrange equation
 - functional minimization/maximization
