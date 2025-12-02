@@ -12,7 +12,7 @@ The third instruction is to create a Euler-Lagrange equation for each dimension 
 $\frac{d}{dt}(\frac{dL}{d\dot{x}_i})=\frac{dL}{dx_i}.$
 Symbolic differentiation libraries are utilized to find the symbolic expression of each side of the equation.
 
-The fourth instruction is to replace every instance of a higher-order derivative of $x_i$ with the alternative given by Finite Difference Method, creating $n \cdot k$ system of equations, where $k$ is the number of discretized grid points for each path. $k$ is dependent on the maximum path length in a way that
+The fourth instruction is to replace every instance of a higher-order derivative of $x_i$ in the symbolic expression of the Euler-Lagrange equations with the alternative given by Finite Difference Method, creating $n \cdot k$ system of equations, where $k$ is the number of discretized grid points for each path. $k$ is dependent on the maximum path length in a way that
 $k=\max(|p_i-q_i|) \cdot \omega$
 where $\omega$ is the number of grid points per unit and $\omega\in\mathbb{Z^+}$. The fact that k is solely dependent on the distance between two given dots relative to a single axis is crucial to maintaining polynomial runtime.
 
