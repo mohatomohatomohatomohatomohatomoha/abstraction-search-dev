@@ -18,7 +18,7 @@ where $\omega$ is the number of grid points per unit and $\omega\in\mathbb{Z^+}$
 
 The fifth instruction is to choose an initial guess for the optimal path. Iteration of the Newton-Raphson method repeatedly applies a re-correction vector to the path until the path approaches a critical point of the line integral functional, whether it be a local minimum, maximum, or a saddle point. Let $\delta$ be the number of times the Newton-Raphson method is iterated. For $\delta$ to be acceptable, the optimal path or a near-optimal path must be found in a reasonable amount of time. Tuning $\delta$ is necessary depending on the complexity of the environment or the accuracy needed.
 
-At this point in the algorithm, a near-optimal/optimal path is found with some confidence. The confidence function can be estimated via
+At this point in the algorithm, a near-optimal/optimal path is found with some confidence. The confidence function can be estimated as
 $\mathcal{C}(\mathcal{S}(x_1,\dots,x_n)) \approx \frac{\mathcal{A}(\delta,\beta)}{2^{(\beta-\xi)} -(\beta-\xi)-1}$
 where $\beta$ is the number of objects, $\xi$ is the number of overlapping objects, and $\mathcal{A(\delta, \beta)}$ is the average number of fully-converged paths discovered from running the Newton-Raphson method out of $\beta$ total objects after $\delta$ iterations. This confidence score is not guaranteed to work for all possible scalar fields that can be defined as $\mathcal{S}$, however it is a decent heuristic for estimating the chances that the optimal path is found. The estimated bounds of $\mathcal{C}$ is $\mathcal{C}\in[0,1)$ for $\beta\in\mathbb{Z^+}$ and $\delta\ge0,\delta\in\mathbb{Z}$, giving us an upper bound for $\mathcal{A}(\delta,\beta)$ being $2^{(\beta-\xi)} -(\beta-\xi)-1$.
 
