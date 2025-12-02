@@ -2,7 +2,7 @@
 
 Abstraction Search is a search algorithm created to address and combat the curse of dimensionality. 
 
-The first instruction is to abstract segments of the environment into their own scalar fields. The simplest way to do this is to imagine the environment as a sum of $n$-dimensional superellipses. The equation for simulating these scalar fields, which will be referred to as \textbf{objects}, will be discussed later. Let $\mathcal{S}(x_1,\dots,x_n)$ be the sum of all objects for an $n$-dimensional scalar field $\mathcal{S}$. 
+The first instruction is to abstract segments of the environment into their own scalar fields. The simplest way to do this is to imagine the environment as a sum of $n$-dimensional superellipses. The equation for simulating these scalar fields, which will be referred to as **objects**, will be discussed later. Let $\mathcal{S}(x_1,\dots,x_n)$ be the sum of all objects for an $n$-dimensional scalar field $\mathcal{S}$. 
 
 The second instruction is to calculate the Lagrangian of the line integral of $\mathcal{S}$ from $(p_1,\dots,p_n)$ to $(q_1,\dots,q_n)$. This can be given by the expression
 $L(x_1(t),\dots)=\mathcal{S}(x_1(t),\dots)\sqrt{\dot{x}_1^2+\dots+\dot{x}_n^2}$
