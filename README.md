@@ -5,9 +5,7 @@ Abstraction Search is a search algorithm created to address and combat the curse
 The first instruction is to abstract segments of the environment into their own scalar fields. The simplest way to do this is to imagine the environment as a sum of $n$-dimensional superellipses. The equation for simulating these scalar fields, which will be referred to as \textbf{objects}, will be discussed later. Let $\mathcal{S}(x_1,\dots,x_n)$ be the sum of all objects for an $n$-dimensional scalar field $\mathcal{S}$. 
 
 The second instruction is to calculate the Lagrangian of the line integral of $\mathcal{S}$ from $(p_1,\dots,p_n)$ to $(q_1,\dots,q_n)$. This can be given by the expression
-\begin{equation}
-L(x_1(t),\dots)=\mathcal{S}(x_1(t),\dots)\sqrt{\dot{x}_1^2+\dots+\dot{x}_n^2}
-\end{equation}
+$L(x_1(t),\dots)=\mathcal{S}(x_1(t),\dots)\sqrt{\dot{x}_1^2+\dots+\dot{x}_n^2}$
 where $x_i(0)=p_i$ and $x_i(1)=q_i$.
 
 The third instriuction is to create a Euler-Lagrange equation for each dimension to solve for the minimal path $x_i(t)$ for $i\in\{\mathbb{Z}\cap[1,n]\}$. This creates $n$ differential equations. The equation for a given $i$ is
