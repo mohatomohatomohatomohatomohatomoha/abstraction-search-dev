@@ -1,80 +1,36 @@
 # abstraction-search-dev
 
-abstraction search is a search algorithm created to
-address the curse of dimensionality. its time complexity is
-polynomial, and compared to superpolynomial and implicitly
-superpolynomial alternatives such as A* and RRT, abstraction search
-shines in higher dimensions where A* and RRT cant.
+Abstraction Search is a search algorithm created to address and combat the curse of dimensionality. 
 
-step 1 (abstraction).
-abstract segments of the n-dimensional environment into their own scalar fields, the most general
-being an "object" (n-dimensional prism/sphere hybrid, something like an n-dimensional superellipse)
-and let the full environment be a sum of objects. let the sum be S(x_1,..., x_n)
+The first instruction is to abstract segments of the environment into their own scalar fields. The simplest way to do this is to imagine the environment as a sum of $n$-dimensional superellipses. The equation for simulating these scalar fields, which will be referred to as \textbf{objects}, will be discussed later. Let $\mathcal{S}(x_1,\dots,x_n)$ be the sum of all objects for an $n$-dimensional scalar field $\mathcal{S}$. 
 
-step 2 (iterative setup).
-find the lagrangian of the line integral of S, which is simply
-L(x_1(t),...x_n(t)) = S(x_1(t),...x_n(t)) * sqrt((dx_1/dt)^2+...+(dx_n/dt)^2)
-as the lagrangian of the action integral is the integrand
+The second instruction is to calculate the Lagrangian of the line integral of $\mathcal{S}$ from $(p_1,\dots,p_n)$ to $(q_1,\dots,q_n)$. This can be given by the expression
+\begin{equation}
+L(x_1(t),\dots)=\mathcal{S}(x_1(t),\dots)\sqrt{\dot{x}_1^2+\dots+\dot{x}_n^2}
+\end{equation}
+where $x_i(0)=p_i$ and $x_i(1)=q_i$.
 
-then, using euler-lagrange, create n differential equations.
-example: \frac{d}{dt}\cdot\frac{dL}{d\dot{x}_i}= = \frac{dL}{dx_i}
+The third instriuction is to create a Euler-Lagrange equation for each dimension to solve for the minimal path $x_i(t)$ for $i\in\{\mathbb{Z}\cap[1,n]\}$. This creates $n$ differential equations. The equation for a given $i$ is
+\[
+\frac{d}{dt}(\frac{dL}{d\dot{x}_i})=\frac{dL}{dx_i}.
+\]
+Symbolic differentiation libraries are utilized to find the symbolic expression of each side of the equation.
 
-step 3 (FDM, systems of equations created).
-then, using symbolic differentiation (sympy?), chain rule each euler-lagrange
-and substitute orders of derivatives of x_i with their alternatives using FDM (letting K be the
-number of discrete grid points along the path. by giving boundaries by giving the start/end points
-we get a boundary value problem, BVP for short)
+The fourth instruction is to replace every instance of a higher-order derivative of $x_i$ with the alternative given by Finite Difference Method, creating $n \cdot k$ system of equations, where $k$ is the number of discretized grid points for each path. $k$ is dependent on the maximum path length in a way that
+\begin{equation}
+k=\max(|p_i-q_i|) \cdot \omega
+\end{equation}
+where $\omega$ is the number of grid points per unit and $\omega\in\mathbb{Z^+}$. The fact that k is solely dependent on the distance between two given dots relative to a single axis is crucial to maintaining polynomial runtime.
 
-step 4 (newton-raphson, self-correction, iterated NRM). 
-there will be multiple functions x_i(t) that satisfy the euler-lagrange equation, as there
-will always be a minimum and maximum. newton-raphson method must be utilized to make an initial guess
-as the initial path is recorrected into a local minima/maxima/saddle point. for a higher confidence
-that the global minima is reached, newton-raphson must be ran multiple times with different paths as initial guesses. keep track
-of the path with the least cost.
+The fifth instruction is to choose an initial guess for the optimal path. Iteration of the Newton-Raphson method repeatedly applies a re-correction vector to the path until the path approaches a critical point of the line integral functional, whether it be a local minimum, maximum, or a saddle point. Let $\delta$ be the number of times the Newton-Raphson method is iterated. For $\delta$ to be acceptable, the optimal path or a near-optimal path must be found in a reasonable amount of time. Tuning $\delta$ is necessary depending on the complexity of the environment or the accuracy needed.
 
-step 5. the x and y values of the discretized path are given, therefore the near-optimal/optimal path
-is found.
+At this point in the algorithm, a near-optimal/optimal path is found with some confidence. The confidence function can be estimated via
+\begin{equation}
+\mathcal{C}(\mathcal{S}(x_1,\dots,x_n)) \approx \frac{\mathcal{A}(\delta,\beta)}{2^{(\beta-\xi)} -(\beta-\xi)-1}
+\end{equation}
+where $\beta$ is the number of objects, $\xi$ is the number of overlapping objects, and $\mathcal{A(\delta, \beta)}$ is the average number of objects discovered from Newton-Raphson method out of $\beta$ total objects after $\delta$ iterations. This confidence score is not guaranteed to work for all possible values of $\mathcal{S}$, however it is a decent heuristic for estimating the chances that the optimal path is found. The estimated bounds of $\mathcal{C}$ is $\mathcal{C}\in[0,1)$ for $\beta\in\mathbb{Z^+}$ and $\delta\ge0,\delta\in\mathbb{Z}$.
 
-theoretical pros of AS:
-
-- i hypothesize the time complexity of AS is likely O(n) or O(n^b) at worst for positive integer b. i
-say this because the number of differential equations that are needed to be solved scales
-linearly, and it is likely that K (# of gridpoints per diff. eq.) is constant/grows
-polynomially. i do not have a formal proof for this, however testing AS in comparison with algorithms
-such as A* is likely to reveal this nature (i have NOT done this yet). K is most likely dependent on
-solely the greatest line distance between the start and target points (think x_2 - x_1 or y_2 - y_1)
-and there is no reason for K to depend on the dimensions of the environment as the function x_i(t) is
-still 1D no matter the dimensions of the environment
-- its very suitable for cost minimization/pathfinding in higher dimensions (4D+)
-
-theoretical cons of AS:
-- setting up objects manually might be bottom 5 activities of all time
-- useless for 2D
-- near-impossible to reasonably visualize higher dimensional scalar fields/solids (3D+)
-- requires an automatic differentiation library or an implementation of it to be effective
-- is not guaranteed to give the most optimal path, only a near-optimal path/most optimal path found
-- requires a lot of care to set up, a single index error or miscalculation can throw off the entire
-algorithm and give trashy results
-
-most of the flaws are just the algorithm being rlly complex and hard to implement, but once set up
-correctly the algorithm should be a life saver in many applications. for example, UAVs which
-have 6 degrees of freedom in the air (x, y, z, roll, pitch, yaw) can use a generalized AS to plan
-paths around obstacles in real time, something that is near-impossible with A* or RRT due to their
-superpolynomial time complexities
-
-the biggest flaw is the poor runtime in lower dimensions and the lack of guarantee for optimality.
-with more intensive research, i believe that scientists can perfect this algorithm and make it
-a standard in path planning in higher dimensions.
-
-everything that i say here is theoretical, as i haven't started working on the code yet and
-likely wont finish for a LONG time. regardless if my assumptions are correct or not or if
-AS is even a valid algorithm to use, i'll have fun crying while working on this
-
-tools to use:
-- sympy for symbolic differentiation (bestowed as a gift from higher dimensional beings...get it 😹😹😹)
-- matplotlib (?) or something else to simulate scalar fields
-
-concepts to use:
+concepts utilized:
 - lagrangian
 - euler-lagrange equation
 - functional minimization/maximization
